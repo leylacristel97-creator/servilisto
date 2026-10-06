@@ -15,5 +15,5 @@ Las licencias originales están en `third_party_licenses/`.
 ### Notas
 
 - Las carpetas de taste-skill se renombraron al valor `name:` de cada `SKILL.md` (p. ej. `soft-skill` → `high-end-visual-design`).
-- De impeccable solo se copió la skill; **no** se instalaron sus hooks (`.claude/settings.json`) ni sus binarios nativos. Para la instalación completa: `npx impeccable install` (ver su README).
+- Impeccable está instalada completa: skill, hooks de revisión automática (`.claude/settings.json`) y sus 4 agentes (`.claude/agents/`). El programa del detector se descarga solo la primera vez que se usa (requiere red).
 - Para actualizar: `npx skills add emilkowalski/skills`, `npx skills add https://github.com/Leonxlnx/taste-skill`, `npx impeccable update`.
