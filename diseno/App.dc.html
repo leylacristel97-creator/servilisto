@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ServiListo – App</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+::selection{background:#19D3C5;color:#0A1628}
+:focus-visible{outline:3px solid #2F5BFF;outline-offset:2px}
+.ap-scroll{scrollbar-width:none}
+.ap-scroll::-webkit-scrollbar{display:none}
+@keyframes ap-in{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.ap-screen{animation:ap-in 420ms cubic-bezier(0.16,1,0.3,1) both}
+.ap-press{transition:transform 160ms cubic-bezier(0.16,1,0.3,1),background-color 160ms ease,border-color 160ms ease}
+.ap-press:active{transform:scale(0.96)}
+@keyframes ap-pulse{0%{box-shadow:0 0 0 0 rgba(47,91,255,0.45)}100%{box-shadow:0 0 0 14px rgba(47,91,255,0)}}
+.ap-pulse{animation:ap-pulse 1.6s ease-out infinite}
+@keyframes ap-pop{0%{transform:scale(0.4);opacity:0}60%{transform:scale(1.12);opacity:1}100%{transform:scale(1);opacity:1}}
+.ap-pop{animation:ap-pop 700ms cubic-bezier(0.16,1,0.3,1) both}
+@keyframes ap-drive{0%{transform:translateX(0)}100%{transform:translateX(150px)}}
+.ap-drive{animation:ap-drive 6s ease-in-out infinite alternate}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #EEF3FA; color: #0A1628; font-family: 'Figtree', 'Segoe UI', sans-serif; display: flex; flex-direction: column">
+
+<!-- CONTENT -->
+<div class="ap-scroll" style="flex: 1 1 auto; overflow-y: auto; min-height: 0">
+
+<!-- HOME -->
+<sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+<div class="ap-screen" style="display: flex; flex-direction: column; gap: 20px; padding: 24px 20px 28px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<div style="display: flex; align-items: center; gap: 8px"><svg width="32" height="32" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><path d="M10 29 L32 10 L54 29 V50 Q54 56 48 56 H16 Q10 56 10 50 Z" fill="#2F5BFF" stroke="#2F5BFF" stroke-width="4" stroke-linejoin="round"></path><path d="M20 36 L29 45 L58 12" fill="none" stroke="#EEF3FA" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20 36 L29 45 L58 12" fill="none" stroke="#19D3C5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.03em">servi<span style="color: #2F5BFF">listo</span></span></div>
+<span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 50%; background: #2F5BFF; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 800">R</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 26px; line-height: 1.1; letter-spacing: -0.02em">Hola, Rosa. ¿Qué se malogró?</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #5B6B85"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>Residencial Los Pinos · Dpto. 302, San Borja</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<button class="ap-press" onClick="{{sp0}}" style="min-height: 96px; border-radius: 20px; border: none; background: #FFFFFF; color: #0A1628; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px"><span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 14px; background: #EEF3FA; color: #2F5BFF; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"></path><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"></path></svg></span>Gasfitería</button><button class="ap-press" onClick="{{sp1}}" style="min-height: 96px; border-radius: 20px; border: none; background: #FFFFFF; color: #0A1628; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px"><span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 14px; background: #EEF3FA; color: #2F5BFF; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg></span>Electricidad</button><button class="ap-press" onClick="{{sp2}}" style="min-height: 96px; border-radius: 20px; border: none; background: #FFFFFF; color: #0A1628; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px"><span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 14px; background: #EEF3FA; color: #2F5BFF; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v5M12 16v5M3 12h5M16 12h5M6 6l3 3M15 15l3 3M6 18l3-3M15 9l3-3"></path></svg></span>Limpieza</button><button class="ap-press" onClick="{{sp3}}" style="min-height: 96px; border-radius: 20px; border: none; background: #FFFFFF; color: #0A1628; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px"><span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 14px; background: #EEF3FA; color: #2F5BFF; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="6" rx="1.5"></rect><path d="M17 7h3v5h-8v3"></path><rect x="10.5" y="15" width="3" height="6" rx="1"></rect></svg></span>Pintura</button><button class="ap-press" onClick="{{sp4}}" style="min-height: 96px; border-radius: 20px; border: none; background: #FFFFFF; color: #0A1628; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px"><span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 14px; background: #EEF3FA; color: #2F5BFF; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"></circle><path d="M11 12l9-9M16.5 6.5l3 3M14 9l2 2"></path></svg></span>Cerrajería</button><button class="ap-press" onClick="{{sp5}}" style="min-height: 96px; border-radius: 20px; border: none; background: #FFFFFF; color: #0A1628; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px"><span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 14px; background: #EEF3FA; color: #2F5BFF; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h8v5a4 4 0 0 1-8 0z"></path><path d="M12 10V8M9 5l1.5 2.5M15 5l-1.5 2.5M8 13H4M16 13h4M8.5 17.5L5 20M15.5 17.5L19 20"></path></svg></span>Fumigación</button>
+</div>
+<div style="background: #0A1628; color: #FFFFFF; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-size: 12px; font-weight: 800; color: #19D3C5">PEDIDO GRUPAL EN TU EDIFICIO</span>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.2">Fumigación el sábado</span>
+<span style="font-size: 14px; line-height: 1.45; color: #C7D3EA">{{groupText}}</span>
+<button class="ap-press" onClick="{{joinGroup}}" style="{{groupBtnStyle}}">{{groupBtn}}</button>
+</div>
+<div style="background: #FFFFFF; border-radius: 24px; padding: 18px 20px; display: flex; align-items: center; gap: 14px">
+<span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 14px; background: #EEF3FA; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 800; font-size: 15px">Próxima revisión del tanque elevado</span><span style="font-size: 13px; color: #5B6B85">Mantenimiento preventivo del edificio · 15 de noviembre</span></span>
+</div>
+<span style="font-size: 12px; color: #5B6B85; text-align: center">Prototipo con datos de ejemplo.</span>
+</div>
+</sc-if>
+
+<!-- TECNICOS -->
+<sc-if value="{{isTechs}}" hint-placeholder-val="{{ false }}">
+<div class="ap-screen" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 20px 28px">
+<button class="ap-press" onClick="{{goHome}}" aria-label="Volver" style="align-self: flex-start; width: 44px; height: 44px; border-radius: 50%; border: none; background: #FFFFFF; color: #0A1628; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em">{{sel.name}}</span>
+<span style="font-size: 15px; line-height: 1.45; color: #3B4A63">{{sel.desc}}</span>
+<span style="align-self: flex-start; background: #FFFFFF; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 800; color: #2F5BFF">Referencial: {{sel.price}}</span>
+<span style="font-size: 13px; font-weight: 800; color: #5B6B85; margin-top: 4px">TÉCNICOS DISPONIBLES CERCA</span>
+<sc-for list="{{techs}}" as="t" hint-placeholder-count="3">
+<div style="background: #FFFFFF; border-radius: 22px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px">
+<span aria-hidden="true" style="{{t.avatarStyle}}">{{t.ini}}</span>
+<span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0"><span style="font-weight: 800; font-size: 16px">{{t.name}}</span><span style="font-size: 13px; color: #5B6B85">{{t.meta}}</span></span>
+<span style="display: inline-flex; align-items: center; gap: 4px; font-weight: 800; font-size: 15px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" fill="#2F5BFF"></path></svg>{{t.rating}}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="display: inline-flex; align-items: center; gap: 4px; background: #E3FAF7; color: #0E6E66; border-radius: 999px; padding: 5px 10px; font-size: 12px; font-weight: 800"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Verificado</span>
+<span style="background: #EEF3FA; color: #3B4A63; border-radius: 999px; padding: 5px 10px; font-size: 12px; font-weight: 700">{{t.tag}}</span>
+</div>
+<button class="ap-press" onClick="{{t.pick}}" style="min-height: 48px; border-radius: 14px; border: none; background: #2F5BFF; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Elegir a {{t.first}}</button>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<!-- AGENDAR Y PAGAR -->
+<sc-if value="{{isBook}}" hint-placeholder-val="{{ false }}">
+<div class="ap-screen" style="display: flex; flex-direction: column; gap: 18px; padding: 20px 20px 28px">
+<button class="ap-press" onClick="{{goTechs}}" aria-label="Volver" style="align-self: flex-start; width: 44px; height: 44px; border-radius: 50%; border: none; background: #FFFFFF; color: #0A1628; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em">Agenda y paga</span>
+<div style="background: #FFFFFF; border-radius: 20px; padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+<span aria-hidden="true" style="{{tech.avatarStyle}}">{{tech.ini}}</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 800">{{tech.name}}</span><span style="font-size: 13px; color: #5B6B85">{{sel.name}} · {{sel.price}}</span></span>
+</div>
+<span style="font-size: 13px; font-weight: 800; color: #5B6B85">DÍA</span>
+<div role="group" aria-label="Día" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{days}}" as="d" hint-placeholder-count="3"><button class="ap-press" onClick="{{d.pick}}" aria-pressed="{{d.pressed}}" style="{{d.style}}">{{d.label}}</button></sc-for>
+</div>
+<span style="font-size: 13px; font-weight: 800; color: #5B6B85">HORA</span>
+<div role="group" aria-label="Hora" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{hours}}" as="h" hint-placeholder-count="6"><button class="ap-press" onClick="{{h.pick}}" aria-pressed="{{h.pressed}}" style="{{h.style}}">{{h.label}}</button></sc-for>
+</div>
+<span style="font-size: 13px; font-weight: 800; color: #5B6B85">MEDIO DE PAGO</span>
+<div role="group" aria-label="Medio de pago" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{pays}}" as="p" hint-placeholder-count="4"><button class="ap-press" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}" style="{{p.style}}">{{p.label}}</button></sc-for>
+</div>
+<div style="display: flex; gap: 10px; align-items: flex-start; background: #E3FAF7; color: #0B4F49; border-radius: 16px; padding: 12px 14px; font-size: 14px; line-height: 1.45; font-weight: 600">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+<span>Tu pago queda protegido: el técnico recién cobra cuando confirmas que todo quedó bien.</span>
+</div>
+<button class="ap-press" onClick="{{confirm}}" style="min-height: 56px; border-radius: 16px; border: none; background: #0A1628; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Confirmar {{dayLabel}}, {{hourLabel}}</button>
+</div>
+</sc-if>
+
+<!-- SEGUIMIENTO -->
+<sc-if value="{{isTrack}}" hint-placeholder-val="{{ false }}">
+<div class="ap-screen" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 20px 28px">
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em">Tu pedido</span>
+<div aria-hidden="true" style="height: 150px; border-radius: 24px; background: #0A1628; position: relative; overflow: hidden">
+<div style="position: absolute; left: 0; right: 0; top: 74px; height: 4px; background: #24406E"></div>
+<div style="position: absolute; left: 160px; top: 0; bottom: 0; width: 4px; background: #24406E"></div>
+<div style="position: absolute; left: 270px; top: 0; bottom: 0; width: 4px; background: #24406E"></div>
+<div style="position: absolute; right: 26px; top: 50px; width: 52px; height: 52px; border-radius: 14px; background: #2F5BFF; display: flex; align-items: center; justify-content: center"><svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><path d="M10 29 L32 10 L54 29 V50 Q54 56 48 56 H16 Q10 56 10 50 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round"></path><path d="M20 36 L29 45 L58 12" fill="none" stroke="#2F5BFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20 36 L29 45 L58 12" fill="none" stroke="#19D3C5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<div class="ap-drive" style="position: absolute; left: 30px; top: 58px; width: 36px; height: 36px; border-radius: 50%; background: #19D3C5; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"></path></svg></div>
+</div>
+<div style="background: #FFFFFF; border-radius: 20px; padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+<span aria-hidden="true" style="{{tech.avatarStyle}}">{{tech.ini}}</span>
+<span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto"><span style="font-weight: 800">{{tech.name}}</span><span style="font-size: 13px; color: #5B6B85">{{sel.name}} · {{dayLabel}}, {{hourLabel}}</span></span>
+<button class="ap-press" aria-label="Llamar al técnico (demostración)" style="width: 44px; height: 44px; border-radius: 50%; border: none; background: #EEF3FA; color: #2F5BFF; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></button>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none; background: #FFFFFF; border-radius: 22px; padding: 18px 16px; display: flex; flex-direction: column; gap: 4px">
+<sc-for list="{{stages}}" as="g" hint-placeholder-count="4">
+<li style="display: flex; gap: 12px; align-items: flex-start; padding: 6px 0">
+<span aria-hidden="true" class="{{g.dotClass}}" style="{{g.dotStyle}}"><sc-if value="{{g.done}}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></sc-if></span>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="{{g.titleStyle}}">{{g.title}}</span><span style="font-size: 13px; color: #5B6B85">{{g.note}}</span></span>
+</li>
+</sc-for>
+</ol>
+<button class="ap-press" onClick="{{advance}}" style="min-height: 52px; border-radius: 16px; border: 2px solid #2F5BFF; background: #FFFFFF; color: #2F5BFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">{{advanceLabel}}</button>
+</div>
+</sc-if>
+
+<!-- CALIFICAR -->
+<sc-if value="{{isRate}}" hint-placeholder-val="{{ false }}">
+<div class="ap-screen" style="display: flex; flex-direction: column; gap: 18px; padding: 28px 20px; align-items: stretch">
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.15; letter-spacing: -0.02em">¿Todo quedó bien?</span>
+<span style="font-size: 15px; line-height: 1.45; color: #3B4A63">Al confirmar, liberamos el pago a {{tech.first}}. Tu calificación ayuda a tus vecinos a elegir.</span>
+<div role="group" aria-label="Calificación" style="display: flex; justify-content: center; gap: 8px; padding: 12px 0">
+<sc-for list="{{stars}}" as="st" hint-placeholder-count="5"><button class="ap-press" onClick="{{st.pick}}" aria-label="{{st.label}}" aria-pressed="{{st.pressed}}" style="width: 52px; height: 52px; border: none; background: transparent; cursor: pointer; padding: 0"><svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" fill="{{st.fill}}"></path></svg></button></sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="4"><button class="ap-press" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="{{c.style}}">{{c.label}}</button></sc-for>
+</div>
+<button class="ap-press" onClick="{{finish}}" style="margin-top: 8px; min-height: 56px; border-radius: 16px; border: none; background: #2F5BFF; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Confirmar y liberar pago</button>
+<button class="ap-press" onClick="{{goTrack}}" style="min-height: 48px; border-radius: 16px; border: none; background: transparent; color: #3B4A63; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Algo no quedó bien: reportar</button>
+</div>
+</sc-if>
+
+<!-- LISTO -->
+<sc-if value="{{isDone}}" hint-placeholder-val="{{ false }}">
+<div class="ap-screen" style="min-height: 760px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; padding: 28px 24px; align-items: center; justify-content: center; text-align: center">
+<span class="ap-pop" aria-hidden="true" style="width: 112px; height: 112px; border-radius: 50%; background: #19D3C5; display: flex; align-items: center; justify-content: center"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.02em">¡Listo!</span>
+<span style="font-size: 16px; line-height: 1.5; color: #3B4A63; max-width: 300px">Pago liberado a {{tech.first}}. Tu garantía de 30 días ya está activa en Pedidos.</span>
+<button class="ap-press" onClick="{{restart}}" style="min-height: 52px; padding: 0 28px; border-radius: 999px; border: none; background: #0A1628; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Volver al inicio</button>
+</div>
+</sc-if>
+
+<!-- PEDIDOS -->
+<sc-if value="{{isOrders}}" hint-placeholder-val="{{ false }}">
+<div class="ap-screen" style="display: flex; flex-direction: column; gap: 14px; padding: 24px 20px 28px">
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em">Pedidos</span>
+<sc-if value="{{hasOrder}}" hint-placeholder-val="{{ false }}">
+<button class="ap-press" onClick="{{goTrack}}" style="text-align: left; background: #FFFFFF; border: 2px solid #2F5BFF; border-radius: 20px; padding: 16px; font-family: inherit; color: #0A1628; cursor: pointer; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; font-weight: 800; color: #2F5BFF">{{orderStatus}}</span><span style="font-weight: 800; font-size: 16px">{{sel.name}} con {{tech.name}}</span><span style="font-size: 13px; color: #5B6B85">{{dayLabel}}, {{hourLabel}}</span></button>
+</sc-if>
+<sc-if value="{{noOrder}}" hint-placeholder-val="{{ true }}">
+<div style="background: #FFFFFF; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+<span style="font-weight: 800; font-size: 16px">Aún no tienes pedidos activos</span>
+<span style="font-size: 14px; line-height: 1.45; color: #5B6B85">Cuando pidas un servicio, aquí verás su estado y la garantía.</span>
+<button class="ap-press" onClick="{{goHome}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; border: none; background: #2F5BFF; color: #FFFFFF; font-family: inherit; font-weight: 800; cursor: pointer">Pedir un servicio</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- EDIFICIO -->
+<sc-if value="{{isBuilding}}" hint-placeholder-val="{{ false }}">
+<div class="ap-screen" style="display: flex; flex-direction: column; gap: 14px; padding: 24px 20px 28px">
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em">Mi edificio</span>
+<span style="font-size: 14px; color: #5B6B85">Residencial Los Pinos · Plan de mantenimiento activo</span>
+<div style="background: #FFFFFF; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 800; color: #5B6B85">PRÓXIMAS REVISIONES</span>
+<div style="display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px solid #EEF3FA; padding-bottom: 8px"><span style="font-weight: 700">Limpieza de tanque elevado</span><span style="font-size: 13px; color: #5B6B85">15 nov.</span></div>
+<div style="display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px solid #EEF3FA; padding-bottom: 8px"><span style="font-weight: 700">Revisión de tablero eléctrico</span><span style="font-size: 13px; color: #5B6B85">2 dic.</span></div>
+<div style="display: flex; justify-content: space-between; gap: 8px"><span style="font-weight: 700">Fumigación de áreas comunes</span><span style="font-size: 13px; color: #5B6B85">10 dic.</span></div>
+</div>
+<div style="background: #0A1628; color: #FFFFFF; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; font-weight: 800; color: #19D3C5">PEDIDO GRUPAL</span>
+<span style="font-weight: 800">Fumigación el sábado</span>
+<span style="font-size: 14px; color: #C7D3EA">{{groupText}}</span>
+</div>
+</div>
+</sc-if>
+
+<!-- PERFIL -->
+<sc-if value="{{isProfile}}" hint-placeholder-val="{{ false }}">
+<div class="ap-screen" style="display: flex; flex-direction: column; gap: 14px; padding: 24px 20px 28px">
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em">Perfil</span>
+<div style="background: #FFFFFF; border-radius: 20px; padding: 16px; display: flex; align-items: center; gap: 12px">
+<span aria-hidden="true" style="width: 52px; height: 52px; border-radius: 50%; background: #2F5BFF; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px">R</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 800">Rosa Quispe</span><span style="font-size: 13px; color: #5B6B85">Dpto. 302 · Residencial Los Pinos</span></span>
+</div>
+<div style="background: #FFFFFF; border-radius: 20px; padding: 6px 16px; display: flex; flex-direction: column">
+<span style="padding: 14px 0; border-bottom: 1px solid #EEF3FA; font-weight: 700">Medios de pago</span>
+<span style="padding: 14px 0; border-bottom: 1px solid #EEF3FA; font-weight: 700">Familiares que piden por mí</span>
+<span style="padding: 14px 0; font-weight: 700">Ayuda y central telefónica</span>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<!-- TAB BAR -->
+<nav aria-label="Navegación principal" style="flex-shrink: 0; background: #FFFFFF; border-top: 1px solid #DCE5F4; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 8px 8px 20px">
+<sc-for list="{{tabs}}" as="tb" hint-placeholder-count="4">
+<button class="ap-press" onClick="{{tb.pick}}" aria-current="{{tb.current}}" style="{{tb.style}}"><span style="{{tb.iconBox}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{tb.icon}}"></path></svg></span><span>{{tb.label}}</span></button>
+</sc-for>
+</nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { screen: 'home', cat: 0, tech: 0, day: 0, hour: 1, pay: 0, stage: 0, stars: 0, chips: [], group: false, ordered: false, finished: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const go = (screen) => () => this.setState({ screen: screen });
+    const cats = [
+      { name: 'Gasfitería', price: 'S/ 120 – 200', desc: 'Fugas, caños que gotean, desatoros, instalación de termas y sanitarios.' },
+      { name: 'Electricidad', price: 'visita S/ 50 – 80', desc: 'Cortocircuitos, tomacorrientes, luminarias y revisión de tableros.' },
+      { name: 'Limpieza', price: 'S/ 70 – 75 por 4 h', desc: 'Limpieza profunda de departamentos, vidrios y áreas comunes.' },
+      { name: 'Pintura', price: 'se cotiza en la visita', desc: 'Pintado de ambientes, resanes y acabados.' },
+      { name: 'Cerrajería', price: 'se cotiza en la visita', desc: 'Apertura de puertas, cambio de chapas y duplicado de llaves.' },
+      { name: 'Fumigación', price: 'S/ 150 – 350', desc: 'Control de plagas en departamentos y áreas comunes.' }
+    ];
+    const techList = [
+      { name: 'Jorge Ramírez', first: 'Jorge', ini: 'JR', meta: 'Llega en ~40 min · 2,1 km', rating: '4,9', tag: 'Atendió en tu edificio', color: '#2F5BFF' },
+      { name: 'Milagros Torres', first: 'Milagros', ini: 'MT', meta: 'Disponible desde las 2 p. m.', rating: '4,8', tag: 'Emite boleta', color: '#0E7C74' },
+      { name: 'Luis Cárdenas', first: 'Luis', ini: 'LC', meta: 'Disponible mañana', rating: '4,7', tag: 'Garantía 30 días', color: '#6A4BD8' }
+    ];
+    const avatar = (c) => 'width: 44px; height: 44px; border-radius: 50%; background: ' + c + '; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0';
+    const chipStyle = (on) => 'min-height: 46px; border-radius: 14px; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; padding: 0 10px; ' + (on ? 'background: #2F5BFF; color: #FFFFFF; border: 2px solid #2F5BFF;' : 'background: #FFFFFF; color: #0A1628; border: 2px solid #DCE5F4;');
+    const days = ['Hoy', 'Mañana', 'Sábado'];
+    const hours = ['9:00 a. m.', '10:30 a. m.', '12:00 m.', '2:00 p. m.', '4:00 p. m.', '6:00 p. m.'];
+    const pays = ['Yape', 'Plin', 'Tarjeta', 'Efectivo'];
+    const stageList = [
+      { title: 'Pedido confirmado', note: 'Pago protegido hasta que confirmes' },
+      { title: 'Técnico en camino', note: 'Te avisamos al llegar a portería' },
+      { title: 'Trabajo en curso', note: 'Puedes llamar al técnico cuando quieras' },
+      { title: 'Trabajo terminado', note: 'Revisa y califica para liberar el pago' }
+    ];
+    const chipList = ['Puntual', 'Limpio y ordenado', 'Explicó todo', 'Buen precio'];
+    const tabIcons = [
+      'M3 11l9-7 9 7M5 10v10h14V10',
+      'M8 4h8a2 2 0 0 1 2 2v14l-6-3-6 3V6a2 2 0 0 1 2-2z',
+      'M4 21V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v16M9 21v-4h6v4M8 8h2M14 8h2M8 12h2M14 12h2',
+      'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0'
+    ];
+    const tabNames = ['Inicio', 'Pedidos', 'Edificio', 'Perfil'];
+    const tabScreens = ['home', 'orders', 'building', 'profile'];
+    const tabOf = { home: 0, techs: 0, book: 0, track: 1, rate: 1, done: 1, orders: 1, building: 2, profile: 3 };
+    const activeTab = tabOf[s.screen];
+    const t = techList[s.tech];
+    const vecinos = s.group ? 6 : 5;
+
+    return {
+      isHome: s.screen === 'home', isTechs: s.screen === 'techs', isBook: s.screen === 'book', isTrack: s.screen === 'track',
+      isRate: s.screen === 'rate', isDone: s.screen === 'done', isOrders: s.screen === 'orders', isBuilding: s.screen === 'building', isProfile: s.screen === 'profile',
+      goHome: go('home'), goTechs: go('techs'), goTrack: go('track'),
+      services: cats.map((c, i) => ({ name: c.name, pick: () => this.setState({ cat: i, screen: 'techs' }) })),
+      sp0: () => this.setState({ cat: 0, screen: 'techs' }), sp1: () => this.setState({ cat: 1, screen: 'techs' }), sp2: () => this.setState({ cat: 2, screen: 'techs' }), sp3: () => this.setState({ cat: 3, screen: 'techs' }), sp4: () => this.setState({ cat: 4, screen: 'techs' }), sp5: () => this.setState({ cat: 5, screen: 'techs' }),
+      sel: cats[s.cat],
+      techs: techList.map((x, i) => ({ ...x, avatarStyle: avatar(x.color), pick: () => this.setState({ tech: i, screen: 'book' }) })),
+      tech: { ...t, avatarStyle: avatar(t.color) },
+      days: days.map((d, i) => ({ label: d, pressed: i === s.day ? 'true' : 'false', style: chipStyle(i === s.day), pick: () => this.setState({ day: i }) })),
+      hours: hours.map((h, i) => ({ label: h, pressed: i === s.hour ? 'true' : 'false', style: chipStyle(i === s.hour), pick: () => this.setState({ hour: i }) })),
+      pays: pays.map((p, i) => ({ label: p, pressed: i === s.pay ? 'true' : 'false', style: chipStyle(i === s.pay), pick: () => this.setState({ pay: i }) })),
+      dayLabel: days[s.day].toLowerCase(), hourLabel: hours[s.hour],
+      confirm: () => this.setState({ screen: 'track', stage: 0, ordered: true, finished: false }),
+      stages: stageList.map((g, i) => ({ ...g, done: i < s.stage || (i === s.stage && s.stage === 3),
+        dotClass: i === s.stage && s.stage < 3 ? 'ap-pulse' : '',
+        dotStyle: 'width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; ' + (i < s.stage || (i === s.stage && s.stage === 3) ? 'background: #19D3C5;' : (i === s.stage ? 'background: #2F5BFF; border: 6px solid #DCE5F4; box-sizing: border-box;' : 'background: #FFFFFF; border: 2px solid #DCE5F4; box-sizing: border-box;')),
+        titleStyle: 'font-weight: 800; font-size: 15px; color: ' + (i <= s.stage ? '#0A1628' : '#5B6B85') })),
+      advanceLabel: s.stage < 3 ? 'Simular siguiente paso' : 'Revisar y calificar',
+      advance: () => (s.stage < 3 ? this.setState({ stage: s.stage + 1 }) : this.setState({ screen: 'rate' })),
+      stars: [1, 2, 3, 4, 5].map((n) => ({ label: n + (n === 1 ? ' estrella' : ' estrellas'), pressed: n <= s.stars ? 'true' : 'false', fill: n <= s.stars ? '#2F5BFF' : '#DCE5F4', pick: () => this.setState({ stars: n }) })),
+      chips: chipList.map((c) => { const on = s.chips.indexOf(c) >= 0; return { label: c, pressed: on ? 'true' : 'false', style: 'min-height: 40px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; ' + (on ? 'background: #0A1628; color: #FFFFFF; border: 2px solid #0A1628;' : 'background: #FFFFFF; color: #0A1628; border: 2px solid #DCE5F4;'), pick: () => this.setState({ chips: on ? s.chips.filter((x) => x !== c) : s.chips.concat([c]) }) }; }),
+      finish: () => this.setState({ screen: 'done', finished: true }),
+      restart: () => this.setState({ screen: 'home', stage: 0, stars: 0, chips: [] }),
+      hasOrder: s.ordered, noOrder: !s.ordered,
+      orderStatus: s.finished ? 'TERMINADO · GARANTÍA ACTIVA' : stageList[s.stage].title.toUpperCase(),
+      groupText: vecinos + ' vecinos unidos. ' + (s.group ? 'Ya estás dentro: el descuento se aplica al confirmar.' : 'Únete y todos pagan menos (descuento de ejemplo).'),
+      groupBtn: s.group ? 'Te uniste al pedido' : 'Unirme al pedido grupal',
+      groupBtnStyle: 'min-height: 46px; border-radius: 14px; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer; ' + (s.group ? 'background: transparent; color: #19D3C5; border: 2px solid #19D3C5;' : 'background: #19D3C5; color: #0A1628; border: 2px solid #19D3C5;'),
+      joinGroup: () => this.setState({ group: !s.group }),
+      tabs: tabNames.map((n, i) => ({ label: n, icon: tabIcons[i], current: i === activeTab ? 'page' : 'false',
+        style: 'border: none; background: transparent; font-family: inherit; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 4px 0; min-height: 52px; color: ' + (i === activeTab ? '#2F5BFF' : '#5B6B85'),
+        iconBox: 'display: flex; align-items: center; justify-content: center; width: 52px; height: 30px; border-radius: 999px; ' + (i === activeTab ? 'background: #E4EBFF;' : ''),
+        pick: () => this.setState({ screen: tabScreens[i] }) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

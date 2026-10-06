@@ -1,0 +1,13 @@
+/* Paleta ServiListo */
+:root {
+  --sl-medianoche: #0A1628; /* fondos oscuros, texto principal */
+  --sl-cobalto:    #2F5BFF; /* color de marca, botones, enlaces */
+  --sl-aqua:       #19D3C5; /* acento: el check, detalles sobre oscuro */
+  --sl-marino:     #13284A; /* secciones oscuras secundarias */
+  --sl-hielo:      #EEF3FA; /* fondo general claro */
+  --sl-neblina:    #DCE5F4; /* bordes y divisores */
+  --sl-pizarra:    #5B6B85; /* texto secundario */
+  --sl-alerta:     #C81E3A; /* solo mensajes de error */
+  --sl-fuente-titulos: 'Unbounded', sans-serif; /* 700 */
+  --sl-fuente-texto:   'Figtree', sans-serif;   /* 400–800 */
+}

@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ServiListo – Servicios para tu condominio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEF3FA}
+a{color:#2F5BFF}a:hover{color:#2448E0}
+html{scroll-behavior:smooth}
+[id]{scroll-margin-top:16px}
+::selection{background:#19D3C5;color:#0A1628}
+input,select{caret-color:#2F5BFF}
+input::placeholder{color:#6B7A93}
+:focus-visible{outline:3px solid #2F5BFF;outline-offset:3px}
+.sl-dark :focus-visible{outline-color:#19D3C5}
+.sl-nav-links{display:flex}
+.sl-menu-btn{display:none}
+.sl-panel{display:none}
+@media (max-width:900px){.sl-nav-links{display:none}.sl-menu-btn{display:inline-flex}.sl-panel{display:flex}}
+@media (max-width:480px){.sl-cta-top{display:none}}
+.sl-navlink{text-decoration:none;color:#0A1628;transition:color 160ms ease}
+.sl-navlink:hover{color:#2F5BFF}
+.sl-btn{transition:transform 220ms cubic-bezier(0.16,1,0.3,1),background-color 200ms ease,box-shadow 220ms ease}
+.sl-btn:hover{transform:translateY(-2px)}
+.sl-btn:active{transform:translateY(0) scale(0.98)}
+.sl-tile{transition:transform 260ms cubic-bezier(0.16,1,0.3,1),border-color 200ms ease,background-color 200ms ease,box-shadow 260ms ease}
+.sl-tile:hover{transform:translateY(-4px);box-shadow:0 16px 30px -18px rgba(0,0,0,0.28)}
+.sl-tile:active{transform:translateY(-1px) scale(0.98)}
+@keyframes sl-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.sl-float{animation:sl-float 6s ease-in-out infinite}
+@keyframes sl-win{0%,45%{opacity:0.2}60%,100%{opacity:1}}
+.sl-win{animation:sl-win 4.5s ease-in-out infinite alternate}
+@keyframes sl-pop{0%{transform:scale(0.4);opacity:0}60%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
+.sl-check-pop{transform-box:fill-box;transform-origin:center;animation:sl-pop 900ms cubic-bezier(0.16,1,0.3,1) 500ms both}
+@keyframes sl-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.sl-in{animation:sl-rise 900ms cubic-bezier(0.16,1,0.3,1) both}
+@keyframes sl-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.sl-draw{transform-origin:left center}
+@supports (animation-timeline: view()){
+.sl-bubble{animation:sl-rise linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+.sl-draw{animation:sl-draw linear both;animation-timeline:view();animation-range:entry 10% cover 45%}
+}
+.sl-bar{transform-origin:left center;transition:transform 520ms cubic-bezier(0.16,1,0.3,1)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div style="font-family: 'Figtree', 'Segoe UI', sans-serif; color: #0A1628; background: #EEF3FA; width: 100%; overflow-x: hidden">
+
+<!-- NAV -->
+<div style="background: #FFFFFF; border-bottom: 1px solid #DCE5F4">
+<div style="max-width: 1200px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="#inicio" aria-label="ServiListo, inicio" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+<svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><path d="M10 29 L32 10 L54 29 V50 Q54 56 48 56 H16 Q10 56 10 50 Z" fill="#2F5BFF" stroke="#2F5BFF" stroke-width="4" stroke-linejoin="round"></path><path d="M20 36 L29 45 L58 12" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20 36 L29 45 L58 12" fill="none" stroke="#19D3C5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 21px; line-height: 1; letter-spacing: -0.03em; color: #0A1628">servi<span style="color: #2F5BFF">listo</span></span>
+</a>
+<div style="display: flex; align-items: center; gap: 22px">
+<div class="sl-nav-links" style="gap: 22px; align-items: center; font-weight: 700; font-size: 15px">
+<a class="sl-navlink" href="#servicios">Servicios</a>
+<a class="sl-navlink" href="#como">Cómo funciona</a>
+<a class="sl-navlink" href="#grupal">Pedido grupal</a>
+<a class="sl-navlink" href="#sin-smartphone">Sin smartphone</a>
+<a class="sl-navlink" href="#tecnicos">Soy técnico</a>
+</div>
+<a class="sl-cta-top sl-btn" href="#contacto" style="text-decoration: none; background: #2F5BFF; color: #FFFFFF; font-weight: 800; font-size: 15px; padding: 12px 20px; border-radius: 999px; white-space: nowrap">Pedir un servicio</a>
+<button class="sl-menu-btn" onClick="{{toggleMenu}}" aria-expanded="{{menuExpanded}}" aria-controls="sl-menu" style="align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 2px solid #DCE5F4; background: #FFFFFF; color: #0A1628; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></sc-if>
+<sc-if value="{{menuClosed}}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></sc-if>
+<span>Menú</span>
+</button>
+</div>
+</div>
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+<div id="sl-menu" class="sl-panel" style="flex-direction: column; padding: 4px 20px 16px; border-top: 1px solid #DCE5F4; font-weight: 700; font-size: 17px">
+<a class="sl-navlink" href="#servicios" onClick="{{closeMenu}}" style="padding: 12px 0; border-bottom: 1px solid #EEF3FA">Servicios</a>
+<a class="sl-navlink" href="#como" onClick="{{closeMenu}}" style="padding: 12px 0; border-bottom: 1px solid #EEF3FA">Cómo funciona</a>
+<a class="sl-navlink" href="#grupal" onClick="{{closeMenu}}" style="padding: 12px 0; border-bottom: 1px solid #EEF3FA">Pedido grupal</a>
+<a class="sl-navlink" href="#sin-smartphone" onClick="{{closeMenu}}" style="padding: 12px 0; border-bottom: 1px solid #EEF3FA">Sin smartphone</a>
+<a class="sl-navlink" href="#tecnicos" onClick="{{closeMenu}}" style="padding: 12px 0; border-bottom: 1px solid #EEF3FA">Soy técnico</a>
+<a href="#contacto" onClick="{{closeMenu}}" style="margin-top: 12px; text-align: center; text-decoration: none; background: #2F5BFF; color: #FFFFFF; padding: 14px 18px; border-radius: 999px">Pedir un servicio</a>
+</div>
+</sc-if>
+</div>
+
+<!-- HERO -->
+<div id="inicio" class="sl-dark" style="background: #0A1628; color: #FFFFFF">
+<div style="max-width: 1200px; margin: 0 auto; padding: 64px 20px 72px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div class="sl-in" style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<h1 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(32px, 3.3vw + 12px, 56px); line-height: 1.08; letter-spacing: -0.025em; text-wrap: balance">¿Se malogró algo en casa? Tu técnico de confianza, <span style="color: #19D3C5">listo.</span></h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.55; color: #A9B8D4; max-width: 34em">Gasfiteros, electricistas, limpieza y más para los condominios y edificios de Lima, verificados y calificados por tus propios vecinos. Pagas seguro y el trabajo tiene garantía.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="sl-btn" href="#servicios" style="background: #19D3C5; color: #0A1628; font-weight: 800; text-decoration: none; padding: 16px 26px; border-radius: 999px">Pedir un servicio</a>
+<a class="sl-btn" href="#sin-smartphone" style="border: 2px solid #3A5482; color: #FFFFFF; font-weight: 700; text-decoration: none; padding: 14px 24px; border-radius: 999px">¿No tienes smartphone?</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 15px; font-weight: 600; color: #C7D3EA">
+<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#19D3C5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Técnicos verificados</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#19D3C5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Pago protegido</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#19D3C5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Garantía de 30 días</span>
+</div>
+</div>
+<div style="flex: 1 1 420px; min-width: 0; position: relative; max-width: 580px; margin: 0 auto">
+<div style="width: 100%; aspect-ratio: 560 / 520">
+<svg viewBox="0 0 560 520" width="100%" height="100%" role="img" aria-label="Ilustración de edificios de departamentos con ventanas encendidas" style="display: block"><rect x="0" y="470" width="560" height="50" fill="#13284A"></rect><rect x="40" y="170" width="170" height="300" rx="14" fill="#13284A"></rect><rect x="62" y="196" width="34" height="22" rx="3" fill="#24406E"></rect><rect class="sl-win" x="110" y="196" width="34" height="22" rx="3" fill="#19D3C5" style="animation-delay: 3.91s"></rect><rect x="158" y="196" width="34" height="22" rx="3" fill="#24406E"></rect><rect x="62" y="230" width="34" height="22" rx="3" fill="#24406E"></rect><rect class="sl-win" x="110" y="230" width="34" height="22" rx="3" fill="#19D3C5" style="animation-delay: 3.04s"></rect><rect x="158" y="230" width="34" height="22" rx="3" fill="#24406E"></rect><rect class="sl-win" x="62" y="264" width="34" height="22" rx="3" fill="#19D3C5" style="animation-delay: 0.54s"></rect><rect x="110" y="264" width="34" height="22" rx="3" fill="#24406E"></rect><rect class="sl-win" x="158" y="264" width="34" height="22" rx="3" fill="#FFD27A" style="animation-delay: 1.34s"></rect><rect x="62" y="298" width="34" height="22" rx="3" fill="#24406E"></rect><rect x="110" y="298" width="34" height="22" rx="3" fill="#24406E"></rect><rect x="158" y="298" width="34" height="22" rx="3" fill="#24406E"></rect><rect x="62" y="332" width="34" height="22" rx="3" fill="#24406E"></rect><rect class="sl-win" x="110" y="332" width="34" height="22" rx="3" fill="#19D3C5" style="animation-delay: 5.15s"></rect><rect class="sl-win" x="158" y="332" width="34" height="22" rx="3" fill="#19D3C5" style="animation-delay: 0.71s"></rect><rect x="62" y="366" width="34" height="22" rx="3" fill="#24406E"></rect><rect class="sl-win" x="110" y="366" width="34" height="22" rx="3" fill="#FFD27A" style="animation-delay: 3.49s"></rect><rect x="158" y="366" width="34" height="22" rx="3" fill="#24406E"></rect><rect x="62" y="400" width="34" height="22" rx="3" fill="#24406E"></rect><rect class="sl-win" x="110" y="400" width="34" height="22" rx="3" fill="#19D3C5" style="animation-delay: 0.36s"></rect><rect x="158" y="400" width="34" height="22" rx="3" fill="#24406E"></rect><rect x="62" y="434" width="34" height="22" rx="3" fill="#24406E"></rect><rect x="110" y="434" width="34" height="22" rx="3" fill="#24406E"></rect><rect x="158" y="434" width="34" height="22" rx="3" fill="#24406E"></rect><rect x="236" y="70" width="200" height="400" rx="14" fill="#1B3560"></rect><rect x="300" y="34" width="56" height="30" rx="6" fill="#2F5BFF"></rect><rect x="312" y="64" width="6" height="10" fill="#2F5BFF"></rect><rect x="338" y="64" width="6" height="10" fill="#2F5BFF"></rect><path d="M300 44h56" stroke="#19D3C5" stroke-width="3"></path><rect x="258" y="96" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="302" y="96" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="346" y="96" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="390" y="96" width="30" height="20" rx="3" fill="#24406E"></rect><rect class="sl-win" x="258" y="128" width="30" height="20" rx="3" fill="#19D3C5" style="animation-delay: 3.45s"></rect><rect x="302" y="128" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="346" y="128" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="390" y="128" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="258" y="160" width="30" height="20" rx="3" fill="#24406E"></rect><rect class="sl-win" x="302" y="160" width="30" height="20" rx="3" fill="#FFD27A" style="animation-delay: 2.51s"></rect><rect class="sl-win" x="346" y="160" width="30" height="20" rx="3" fill="#19D3C5" style="animation-delay: 2.93s"></rect><rect x="390" y="160" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="258" y="192" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="302" y="192" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="346" y="192" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="390" y="192" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="258" y="224" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="302" y="224" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="346" y="224" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="390" y="224" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="258" y="256" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="302" y="256" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="346" y="256" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="390" y="256" width="30" height="20" rx="3" fill="#24406E"></rect><rect class="sl-win" x="258" y="288" width="30" height="20" rx="3" fill="#FFD27A" style="animation-delay: 4.21s"></rect><rect x="302" y="288" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="346" y="288" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="390" y="288" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="258" y="320" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="302" y="320" width="30" height="20" rx="3" fill="#24406E"></rect><rect class="sl-win" x="346" y="320" width="30" height="20" rx="3" fill="#19D3C5" style="animation-delay: 2.77s"></rect><rect class="sl-win" x="390" y="320" width="30" height="20" rx="3" fill="#FFD27A" style="animation-delay: 0.35s"></rect><rect class="sl-win" x="258" y="352" width="30" height="20" rx="3" fill="#19D3C5" style="animation-delay: 1.49s"></rect><rect x="302" y="352" width="30" height="20" rx="3" fill="#24406E"></rect><rect class="sl-win" x="346" y="352" width="30" height="20" rx="3" fill="#19D3C5" style="animation-delay: 2.7s"></rect><rect x="390" y="352" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="258" y="384" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="302" y="384" width="30" height="20" rx="3" fill="#24406E"></rect><rect class="sl-win" x="346" y="384" width="30" height="20" rx="3" fill="#19D3C5" style="animation-delay: 2.49s"></rect><rect x="390" y="384" width="30" height="20" rx="3" fill="#24406E"></rect><rect x="258" y="416" width="30" height="20" rx="3" fill="#24406E"></rect><rect class="sl-win" x="302" y="416" width="30" height="20" rx="3" fill="#19D3C5" style="animation-delay: 1.06s"></rect><rect class="sl-win" x="346" y="416" width="30" height="20" rx="3" fill="#19D3C5" style="animation-delay: 2.91s"></rect><rect class="sl-win" x="390" y="416" width="30" height="20" rx="3" fill="#19D3C5" style="animation-delay: 0.02s"></rect><rect x="306" y="420" width="60" height="50" rx="6" fill="#0A1628"></rect><rect x="462" y="230" width="80" height="240" rx="12" fill="#13284A"></rect><rect x="476" y="252" width="22" height="18" rx="3" fill="#24406E"></rect><rect x="512" y="252" width="22" height="18" rx="3" fill="#24406E"></rect><rect x="476" y="282" width="22" height="18" rx="3" fill="#24406E"></rect><rect x="512" y="282" width="22" height="18" rx="3" fill="#24406E"></rect><rect x="476" y="312" width="22" height="18" rx="3" fill="#24406E"></rect><rect x="512" y="312" width="22" height="18" rx="3" fill="#24406E"></rect><rect x="476" y="342" width="22" height="18" rx="3" fill="#24406E"></rect><rect class="sl-win" x="512" y="342" width="22" height="18" rx="3" fill="#FFD27A" style="animation-delay: 5.4s"></rect><rect x="476" y="372" width="22" height="18" rx="3" fill="#24406E"></rect><rect x="512" y="372" width="22" height="18" rx="3" fill="#24406E"></rect><rect x="476" y="402" width="22" height="18" rx="3" fill="#24406E"></rect><rect x="512" y="402" width="22" height="18" rx="3" fill="#24406E"></rect><rect class="sl-win" x="476" y="432" width="22" height="18" rx="3" fill="#19D3C5" style="animation-delay: 3.81s"></rect><rect class="sl-win" x="512" y="432" width="22" height="18" rx="3" fill="#19D3C5" style="animation-delay: 1.25s"></rect><g class="sl-check-pop"><circle cx="440" cy="120" r="34" fill="#19D3C5"></circle><path d="M424 121l11 11 22-24" fill="none" stroke="#0A1628" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>
+</div>
+<div class="sl-float" style="position: absolute; left: 0; top: 54%; background: #FFFFFF; color: #0A1628; border-radius: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; max-width: 260px">
+<span aria-hidden="true" style="width: 42px; height: 42px; border-radius: 50%; background: #2F5BFF; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0">JR</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 800; font-size: 15px">Técnico verificado en camino</span><span style="font-size: 13px; color: #5B6B85">Gasfitería · hoy, 10:30 a. m.</span></span>
+</div>
+<div class="sl-float" style="position: absolute; right: 0; top: 4%; background: #2F5BFF; color: #FFFFFF; border-radius: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; max-width: 240px; animation-delay: -3s">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 800; font-size: 15px">Pago protegido</span><span style="font-size: 13px; color: #FFFFFF">Se libera cuando confirmas</span></span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SERVICIOS -->
+<div id="servicios" style="max-width: 1200px; margin: 0 auto; padding: 88px 20px 40px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(28px, 2.4vw + 14px, 46px); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance">¿Qué necesitas hoy?</h2>
+<p style="margin: 0; max-width: 420px; font-size: 17px; line-height: 1.5; color: #5B6B85">Elige un servicio para ver qué incluye y su precio referencial.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+<div role="group" aria-label="Elige un servicio" style="flex: 1 1 560px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px">
+<button class="sl-tile" onClick="{{p0}}" aria-pressed="{{a0}}" style="{{t0}}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"></path><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"></path></svg><span style="font-weight: 800; font-size: 17px">Gasfitería</span></button>
+<button class="sl-tile" onClick="{{p1}}" aria-pressed="{{a1}}" style="{{t1}}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg><span style="font-weight: 800; font-size: 17px">Electricidad</span></button>
+<button class="sl-tile" onClick="{{p2}}" aria-pressed="{{a2}}" style="{{t2}}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v5M12 16v5M3 12h5M16 12h5M6 6l3 3M15 15l3 3M6 18l3-3M15 9l3-3"></path></svg><span style="font-weight: 800; font-size: 17px">Limpieza</span></button>
+<button class="sl-tile" onClick="{{p3}}" aria-pressed="{{a3}}" style="{{t3}}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="14" height="6" rx="1.5"></rect><path d="M17 7h3v5h-8v3"></path><rect x="10.5" y="15" width="3" height="6" rx="1"></rect></svg><span style="font-weight: 800; font-size: 17px">Pintura</span></button>
+<button class="sl-tile" onClick="{{p4}}" aria-pressed="{{a4}}" style="{{t4}}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"></circle><path d="M11 12l9-9M16.5 6.5l3 3M14 9l2 2"></path></svg><span style="font-weight: 800; font-size: 17px">Cerrajería</span></button>
+<button class="sl-tile" onClick="{{p5}}" aria-pressed="{{a5}}" style="{{t5}}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 10h8v5a4 4 0 0 1-8 0z"></path><path d="M12 10V8M9 5l1.5 2.5M15 5l-1.5 2.5M8 13H4M16 13h4M8.5 17.5L5 20M15.5 17.5L19 20"></path></svg><span style="font-weight: 800; font-size: 17px">Fumigación</span></button>
+</div>
+<div aria-live="polite" class="sl-dark" style="flex: 1 1 340px; min-width: 0; background: #0A1628; color: #FFFFFF; border-radius: 28px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.02em">{{sel.name}}</span>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #C7D3EA">{{sel.desc}}</p>
+<div style="border-top: 1px solid #24406E; padding-top: 14px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; font-weight: 700; color: #8FA3C4">Precio referencial</span>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 22px; color: #19D3C5">{{sel.price}}</span>
+<span style="font-size: 13px; line-height: 1.45; color: #A9B8D4">Mano de obra, sin materiales. Precios de mercado en Lima (2026); el técnico confirma el monto final antes de empezar.</span>
+</div>
+<a class="sl-btn" href="#contacto" style="margin-top: auto; text-align: center; background: #19D3C5; color: #0A1628; font-weight: 800; text-decoration: none; padding: 16px; border-radius: 16px">Pedir {{selLower}}</a>
+</div>
+</div>
+</div>
+
+<!-- POR QUÉ -->
+<div id="porque" style="max-width: 1200px; margin: 0 auto; padding: 72px 20px 48px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(28px, 2.4vw + 14px, 46px); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance">Adiós al "¿alguien conoce un gasfitero?" del grupo de WhatsApp</h2>
+<div aria-hidden="true" style="background: #DCE5F4; border-radius: 26px; padding: 20px; display: flex; flex-direction: column; gap: 10px; max-width: 440px">
+<span style="font-size: 13px; font-weight: 700; color: #5B6B85">Grupo de vecinos · Torre B</span>
+<div class="sl-bubble" style="align-self: flex-start; max-width: 85%; background: #FFFFFF; border-radius: 4px 18px 18px 18px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 800; color: #2F5BFF">Dpto. 302</span><span style="font-size: 15px; line-height: 1.4">¿Alguien conoce un gasfitero de confianza? Se está saliendo el agua del baño.</span></div>
+<div class="sl-bubble" style="align-self: flex-start; max-width: 85%; background: #FFFFFF; border-radius: 4px 18px 18px 18px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 800; color: #0E7C74">Dpto. 105</span><span style="font-size: 15px; line-height: 1.4">Tenía uno, pero ya no contesta.</span></div>
+<div class="sl-bubble" style="align-self: flex-start; max-width: 85%; background: #FFFFFF; border-radius: 4px 18px 18px 18px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 800; color: #6A4BD8">Dpto. 701</span><span style="font-size: 15px; line-height: 1.4">Pregunta en portería, a lo mejor tienen algún número.</span></div>
+<div class="sl-bubble" style="align-self: flex-end; max-width: 85%; background: #2F5BFF; color: #FFFFFF; border-radius: 18px 4px 18px 18px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 800; color: #FFFFFF">Tú</span><span style="font-size: 15px; line-height: 1.4">Ya lo pedí por ServiListo. Llega a las 10:30.</span></div>
+</div>
+</div>
+<div style="flex: 1 1 420px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 28px">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-top: 2px solid #0A1628">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+<h3 style="margin: 0; font-weight: 800; font-size: 20px">Técnicos verificados</h3><p style="margin: 0; line-height: 1.5; color: #3B4A63">Validamos identidad, antecedentes y experiencia antes de que entren a tu casa.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-top: 2px solid #0A1628">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18"></path><path d="M7 15h3"></path></svg>
+<h3 style="margin: 0; font-weight: 800; font-size: 20px">Pago protegido</h3><p style="margin: 0; line-height: 1.5; color: #3B4A63">Pagas con Yape, Plin o tarjeta. El técnico cobra recién cuando confirmas que todo quedó bien.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-top: 2px solid #0A1628">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"></path></svg>
+<h3 style="margin: 0; font-weight: 800; font-size: 20px">Garantía de 30 días</h3><p style="margin: 0; line-height: 1.5; color: #3B4A63">Si el trabajo falla por causa del técnico, regresa sin costo para ti.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-top: 2px solid #0A1628">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"></path></svg>
+<h3 style="margin: 0; font-weight: 800; font-size: 20px">Cuidamos el agua</h3><p style="margin: 0; line-height: 1.5; color: #3B4A63">Con el mantenimiento preventivo, las fugas se detectan antes de que suba tu recibo.</p>
+</div>
+</div>
+</div>
+
+<!-- CÓMO FUNCIONA -->
+<div id="como" style="background: #FFFFFF">
+<div style="max-width: 1200px; margin: 0 auto; padding: 80px 20px; display: flex; flex-direction: column; gap: 40px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(28px, 2.4vw + 14px, 46px); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance">Cómo funciona, en 4 pasos</h2>
+<div style="position: relative">
+<div aria-hidden="true" style="height: 4px; background: #DCE5F4; border-radius: 999px; margin-bottom: 28px; overflow: hidden"><div class="sl-draw" style="height: 100%; width: 100%; background: #2F5BFF"></div></div>
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="4">
+<li style="display: flex; flex-direction: column; gap: 12px">
+<span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 18px; background: #EEF3FA; color: #2F5BFF; display: flex; align-items: center; justify-content: center; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 24px">{{s.n}}</span>
+<h3 style="margin: 0; font-size: 21px; font-weight: 800">{{s.title}}</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #3B4A63">{{s.text}}</p>
+</li>
+</sc-for>
+</ol>
+</div>
+</div>
+</div>
+
+<!-- PEDIDO GRUPAL -->
+<div id="grupal" class="sl-dark" style="background: #13284A; color: #FFFFFF">
+<div style="max-width: 1200px; margin: 0 auto; padding: 80px 20px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(28px, 2.4vw + 14px, 46px); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; color: #FFFFFF">Entre vecinos, <span style="color: #19D3C5">sale mejor</span></h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; max-width: 36em; color: #C7D3EA">Con el pedido grupal, varios departamentos del mismo edificio piden el mismo servicio el mismo día: fumigación, limpieza de tanques o revisión de termas. El técnico ahorra traslados y todos pagan menos.</p>
+<span style="font-size: 14px; color: #A9B8D4">Simulador con regla de ejemplo: 5 % de descuento por cada 2 vecinos, hasta 20 %. Los porcentajes reales se definirán más adelante.</span>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; background: #0A1628; border: 1px solid #24406E; border-radius: 28px; padding: 32px; display: flex; flex-direction: column; gap: 20px; align-items: center">
+<span id="sl-vecinos-label" style="font-weight: 700; font-size: 16px; color: #C7D3EA">Vecinos que se unen al pedido</span>
+<div role="group" aria-labelledby="sl-vecinos-label" style="display: flex; align-items: center; gap: 24px">
+<button class="sl-btn" onClick="{{less}}" aria-label="Quitar un vecino" style="width: 56px; height: 56px; border-radius: 50%; border: 2px solid #3A5482; background: transparent; color: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 64px; min-width: 90px; text-align: center; font-variant-numeric: tabular-nums">{{vecinos}}</span>
+<button class="sl-btn" onClick="{{more}}" aria-label="Agregar un vecino" style="width: 56px; height: 56px; border-radius: 50%; border: none; background: #19D3C5; color: #0A1628; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+<div aria-hidden="true" style="width: 100%; height: 14px; background: #1B3560; border-radius: 999px; overflow: hidden">
+<div class="sl-bar" style="{{barStyle}}"></div>
+</div>
+<div aria-live="polite" style="display: flex; flex-direction: column; align-items: center; gap: 6px">
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 28px; color: #19D3C5">{{descText}}</span>
+<span style="font-size: 15px; text-align: center; color: #C7D3EA">{{descMsg}}</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SIN SMARTPHONE -->
+<div id="sin-smartphone" style="max-width: 1200px; margin: 0 auto; padding: 88px 20px 72px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(28px, 2.4vw + 14px, 46px); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance">¿No tienes smartphone? También puedes pedir</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; max-width: 760px; color: #3B4A63">ServiListo es para todos los vecinos, incluidos los adultos mayores o quienes prefieren no usar aplicaciones. Elige el canal que te quede más cómodo:</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px">
+<div class="sl-tile" style="background: #FFFFFF; border: 2px solid #DCE5F4; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>
+<h3 style="margin: 0; font-weight: 800; font-size: 19px">Llamada telefónica</h3>
+<p style="margin: 0; line-height: 1.5; color: #3B4A63">Llamas a nuestra central, un asesor registra tu pedido y te confirma la hora del técnico.</p>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 18px; color: #2F5BFF">[NÚMERO DE CENTRAL]</span>
+</div>
+<div class="sl-tile" style="background: #FFFFFF; border: 2px solid #DCE5F4; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg>
+<h3 style="margin: 0; font-weight: 800; font-size: 19px">Desde esta página web</h3>
+<p style="margin: 0; line-height: 1.5; color: #3B4A63">Pides desde cualquier computadora o tablet, sin descargar nada.</p>
+</div>
+<div class="sl-tile" style="background: #FFFFFF; border: 2px solid #DCE5F4; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v16"></path><path d="M9 21v-4h6v4"></path><path d="M8 8h2M14 8h2M8 12h2M14 12h2"></path></svg>
+<h3 style="margin: 0; font-weight: 800; font-size: 19px">En portería o administración</h3>
+<p style="margin: 0; line-height: 1.5; color: #3B4A63">El conserje o la administración de tu edificio afiliado registra el pedido por ti desde el panel del condominio.</p>
+</div>
+<div class="sl-tile" style="background: #FFFFFF; border: 2px solid #DCE5F4; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20h4v-2a3 3 0 0 0-5-2.2"></path><path d="M3 20h12v-2a4 4 0 0 0-8 0"></path><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.5"></circle></svg>
+<h3 style="margin: 0; font-weight: 800; font-size: 19px">Con un familiar</h3>
+<p style="margin: 0; line-height: 1.5; color: #3B4A63">Un hijo o familiar puede pedir desde su app y registrar tu dirección. Tú pagas en efectivo al confirmar o te ayudamos con otro medio.</p>
+</div>
+</div>
+</div>
+
+<!-- TÉCNICOS Y JUNTAS -->
+<div id="tecnicos" style="max-width: 1200px; margin: 0 auto; padding: 8px 20px 88px; display: flex; flex-wrap: wrap; gap: 20px">
+<div class="sl-dark" style="flex: 1 1 400px; min-width: 0; background: #2F5BFF; color: #FFFFFF; border-radius: 28px; padding: 36px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: -0.02em">¿Eres técnico?</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #EEF3FA">Recibe pedidos de edificios cerca de tu zona, cobra seguro y construye tu reputación con las calificaciones de tus clientes.</p>
+<span style="font-size: 15px; color: #FFFFFF">Requisitos: DNI, certificado de antecedentes y experiencia comprobable.</span>
+<a class="sl-btn" href="#contacto" style="align-self: flex-start; background: #FFFFFF; color: #0A1628; font-weight: 800; text-decoration: none; padding: 14px 22px; border-radius: 999px">Quiero unirme</a>
+</div>
+<div style="flex: 1 1 400px; min-width: 0; background: #FFFFFF; border: 2px solid #DCE5F4; border-radius: 28px; padding: 36px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: -0.02em; color: #0A1628">¿Eres de la junta de propietarios?</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #3B4A63">Afilia tu edificio al plan de mantenimiento preventivo: revisiones programadas de áreas comunes, historial de servicios y pedidos grupales para todos los vecinos.</p>
+<span style="font-size: 15px; font-weight: 700; color: #2F5BFF">Plan mensual referencial: S/ 200 por condominio</span>
+<a class="sl-btn" href="#contacto" style="align-self: flex-start; background: #0A1628; color: #FFFFFF; font-weight: 800; text-decoration: none; padding: 14px 22px; border-radius: 999px">Afiliar mi condominio</a>
+</div>
+</div>
+
+<!-- FAQ -->
+<div id="faq" style="background: #FFFFFF">
+<div style="max-width: 860px; margin: 0 auto; padding: 80px 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(28px, 2.4vw + 14px, 46px); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; margin-bottom: 12px">Preguntas frecuentes</h2>
+<sc-for list="{{faqs}}" as="f" hint-placeholder-count="4">
+<div style="background: #EEF3FA; border-radius: 20px; overflow: hidden">
+<h3 style="margin: 0">
+<button onClick="{{f.toggle}}" aria-expanded="{{f.expanded}}" aria-controls="{{f.panelId}}" style="width: 100%; text-align: left; background: transparent; border: none; padding: 20px 22px; font-family: 'Figtree', sans-serif; font-size: 17px; font-weight: 700; color: #0A1628; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px"><span>{{f.q}}</span>
+<span aria-hidden="true" style="{{f.iconStyle}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>
+</button>
+</h3>
+<sc-if value="{{f.open}}" hint-placeholder-val="{{ false }}">
+<div id="{{f.panelId}}" style="padding: 0 22px 20px; font-size: 16px; line-height: 1.6; color: #3B4A63">{{f.a}}</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+
+<!-- CONTACTO -->
+<div id="contacto" style="background: #2F5BFF">
+<div style="max-width: 1200px; margin: 0 auto; padding: 80px 20px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px; color: #FFFFFF">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(28px, 2.4vw + 14px, 46px); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; color: #FFFFFF">Haz tu primer pedido</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #EEF3FA">Déjanos tus datos y un asesor te llama para confirmar el día y la hora del técnico.</p>
+</div>
+<div style="flex: 1 1 460px; min-width: 0; background: #FFFFFF; border-radius: 28px; padding: 32px">
+
+<sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 12px">
+<span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; background: #19D3C5; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em">¡Listo, {{nombre}}! Recibimos tu pedido.</span>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 16px; font-size: 16px; line-height: 1.45">
+<dt style="font-weight: 700; color: #5B6B85">Servicio</dt><dd style="margin: 0; font-weight: 700; overflow-wrap: anywhere">{{sel.name}}</dd>
+<dt style="font-weight: 700; color: #5B6B85">Teléfono</dt><dd style="margin: 0; font-weight: 700; overflow-wrap: anywhere">{{telefono}}</dd>
+<dt style="font-weight: 700; color: #5B6B85">Edificio</dt><dd style="margin: 0; font-weight: 700; overflow-wrap: anywhere">{{edificio}}</dd>
+</dl>
+<p style="margin: 0; font-size: 16px; line-height: 1.5">Un asesor te llamará al número que dejaste para confirmar el día y la hora del técnico.</p>
+<span style="font-size: 14px; color: #5B6B85">Demostración: aún no se envía ningún dato.</span>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button class="sl-btn" onClick="{{edit}}" style="min-height: 48px; padding: 0 20px; border-radius: 999px; border: 2px solid #2F5BFF; background: #FFFFFF; color: #2F5BFF; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Corregir datos</button>
+<button class="sl-btn" onClick="{{reset}}" style="min-height: 48px; padding: 0 20px; border-radius: 999px; border: none; background: #2F5BFF; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Hacer otro pedido</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<span style="font-size: 14px; color: #5B6B85">Todos los campos son obligatorios.</span>
+
+<sc-if value="{{showSummary}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="display: flex; gap: 10px; align-items: flex-start; background: #FDECEF; color: #8A1028; border-radius: 14px; padding: 14px 16px; font-size: 16px; line-height: 1.45; font-weight: 600">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C81E3A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5M12 16.5v.01"></path></svg>
+<span>Faltan {{errCount}} para enviar tu pedido. Revisa los campos marcados.</span>
+</div>
+</sc-if>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="sl-servicio" style="font-weight: 700">Servicio</label>
+<select id="sl-servicio" value="{{catStr}}" onChange="{{setCat}}" style="min-height: 52px; padding: 0 14px; border-radius: 14px; border: 2px solid #DCE5F4; background: #FFFFFF; color: #0A1628; font-size: 16px; font-family: 'Figtree', sans-serif">
+<option value="0">Gasfitería</option>
+<option value="1">Electricidad</option>
+<option value="2">Limpieza</option>
+<option value="3">Pintura</option>
+<option value="4">Cerrajería</option>
+<option value="5">Fumigación</option>
+</select>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="sl-nombre" style="font-weight: 700">Tu nombre</label>
+<input id="sl-nombre" value="{{nombreInput}}" onChange="{{setNombre}}" autoComplete="name" maxLength="60" aria-invalid="{{nombreInvalid}}" aria-describedby="sl-nombre-err" placeholder="Ej.: Rosa Quispe" style="{{nombreStyle}}">
+<sc-if value="{{showErrNombre}}" hint-placeholder-val="{{ false }}"><span id="sl-nombre-err" style="font-size: 15px; font-weight: 700; color: #C81E3A">{{errNombre}}</span></sc-if>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="sl-tel" style="font-weight: 700">Teléfono o celular</label>
+<input id="sl-tel" type="tel" inputMode="tel" autoComplete="tel" maxLength="15" value="{{telefono}}" onChange="{{setTel}}" aria-invalid="{{telInvalid}}" aria-describedby="sl-tel-err" placeholder="Ej.: 987 654 321" style="{{telStyle}}">
+<sc-if value="{{showErrTel}}" hint-placeholder-val="{{ false }}"><span id="sl-tel-err" style="font-size: 15px; font-weight: 700; color: #C81E3A">{{errTel}}</span></sc-if>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="sl-edif" style="font-weight: 700">Condominio o edificio, y distrito</label>
+<input id="sl-edif" value="{{edificio}}" onChange="{{setEdif}}" autoComplete="street-address" maxLength="100" aria-invalid="{{edifInvalid}}" aria-describedby="sl-edif-err" placeholder="Ej.: Residencial Los Pinos, San Borja" style="{{edifStyle}}">
+<sc-if value="{{showErrEdif}}" hint-placeholder-val="{{ false }}"><span id="sl-edif-err" style="font-size: 15px; font-weight: 700; color: #C81E3A">{{errEdif}}</span></sc-if>
+</div>
+
+<button class="sl-btn" onClick="{{send}}" style="margin-top: 4px; background: #0A1628; color: #FFFFFF; border: none; min-height: 56px; padding: 0 20px; border-radius: 16px; font-size: 17px; font-weight: 800; cursor: pointer; font-family: 'Figtree', sans-serif">Enviar pedido de {{selLower}}</button>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div style="background: #0A1628; color: #A9B8D4; font-size: 14px">
+<div style="max-width: 1200px; margin: 0 auto; padding: 32px 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px">
+<span style="display: flex; align-items: center; gap: 10px"><svg width="36" height="36" viewBox="0 0 64 64" aria-hidden="true" style="flex-shrink: 0"><path d="M10 29 L32 10 L54 29 V50 Q54 56 48 56 H16 Q10 56 10 50 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round"></path><path d="M20 36 L29 45 L58 12" fill="none" stroke="#0A1628" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20 36 L29 45 L58 12" fill="none" stroke="#19D3C5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.03em; color: #FFFFFF">servi<span style="color: #19D3C5">listo</span></span></span>
+<span>Proyecto del curso Innovación Estratégica de Negocios – Cibertec 2026</span>
+<span>Prototipo académico: no es un servicio real ni recibe pedidos.</span>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":4200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cat: 0, vecinos: 4, faq: -1, nombre: '', telefono: '', edificio: '', tried: false, sent: false, menu: false };
+  }
+  renderVals() {
+    const cats = [
+      { name: 'Gasfitería', price: 'S/ 120 – 200 por trabajo', desc: 'Fugas, caños que gotean, desatoros, instalación de termas y sanitarios.' },
+      { name: 'Electricidad', price: 'Visita y diagnóstico S/ 50 – 80', desc: 'Cortocircuitos, tomacorrientes, luminarias y revisión de tableros.' },
+      { name: 'Limpieza', price: 'S/ 70 – 75 por 4 horas', desc: 'Limpieza profunda de departamentos, vidrios y áreas comunes.' },
+      { name: 'Pintura', price: 'Se cotiza en la visita, según los m²', desc: 'Pintado de ambientes, resanes y acabados.' },
+      { name: 'Cerrajería', price: 'Se cotiza en la visita', desc: 'Apertura de puertas, cambio de chapas y duplicado de llaves.' },
+      { name: 'Fumigación', price: 'S/ 150 – 350 según tamaño y plaga', desc: 'Control de plagas en departamentos y áreas comunes.' }
+    ];
+    const s = this.state;
+    const steps = [
+      { title: 'Elige', text: 'Busca el servicio que necesitas o elige una categoría. Verás técnicos disponibles cerca de tu edificio.' },
+      { title: 'Compara', text: 'Revisa el perfil de cada técnico: verificación, calificaciones de otros vecinos, precio referencial y garantía.' },
+      { title: 'Agenda y paga', text: 'Escoge día y hora y paga con Yape, Plin o tarjeta. Tu pago queda protegido hasta que el trabajo termine.' },
+      { title: 'Califica', text: 'Confirma que todo quedó bien, el técnico recibe su pago y tú lo calificas para ayudar a tus vecinos.' }
+    ];
+    const faqs = [
+      { q: '¿Cómo sé que el técnico es confiable?', a: 'Todos los técnicos pasan por una verificación de identidad, antecedentes y experiencia antes de recibir pedidos. Además, ves las calificaciones de otros vecinos.' },
+      { q: '¿Qué pasa si el trabajo sale mal?', a: 'Tienes una garantía de 30 días sobre la mano de obra: si falla por causa del técnico, regresa sin costo.' },
+      { q: '¿Puedo pedir si no tengo smartphone?', a: 'Sí. Puedes llamar a nuestra central, pedir desde la página web, hacerlo en portería o administración de tu edificio afiliado, o pedir ayuda a un familiar.' },
+      { q: '¿Qué es el pedido grupal?', a: 'Es cuando varios vecinos del mismo edificio piden el mismo servicio el mismo día. Como el técnico ahorra traslados, todos obtienen un mejor precio.' }
+    ];
+    const pct = Math.min(20, Math.floor(s.vecinos / 2) * 5);
+    const tileBase = 'display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 20px; border-radius: 22px; min-height: 132px; text-align: left; font-family: inherit; cursor: pointer; ';
+    const tileOn = 'background: #2F5BFF; color: #FFFFFF; border: 2px solid #2F5BFF;';
+    const tileOff = 'background: #FFFFFF; color: #0A1628; border: 2px solid #DCE5F4;';
+
+    const digits = s.telefono.replace(/\D/g, '');
+    const errNombre = s.nombre.trim().length < 2 ? 'Escribe tu nombre para saber por quién preguntar.' : '';
+    const errTel = digits.length < 7 || digits.length > 9 ? 'Escribe tu celular (9 dígitos) o tu teléfono fijo.' : '';
+    const errEdif = s.edificio.trim().length < 3 ? 'Indica tu condominio o edificio y el distrito.' : '';
+    const errors = [errNombre, errTel, errEdif].filter(Boolean).length;
+    const show = s.tried;
+    const inputBase = 'min-height: 52px; padding: 0 14px; border-radius: 14px; font-size: 16px; font-family: \'Figtree\', sans-serif; color: #0A1628; background: #FFFFFF; box-sizing: border-box; width: 100%; ';
+    const inputStyle = (err) => inputBase + (show && err ? 'border: 2px solid #C81E3A;' : 'border: 2px solid #DCE5F4;');
+
+    const vals = {
+      menuOpen: s.menu,
+      menuClosed: !s.menu,
+      menuExpanded: s.menu ? 'true' : 'false',
+      toggleMenu: () => this.setState({ menu: !s.menu }),
+      closeMenu: () => this.setState({ menu: false }),
+
+      sel: cats[s.cat],
+      selLower: cats[s.cat].name.toLowerCase(),
+      catStr: String(s.cat),
+      setCat: (e) => this.setState({ cat: Number(e.target.value) || 0 }),
+
+      steps: steps.map((st, i) => ({ ...st, n: i + 1 })),
+
+      vecinos: s.vecinos,
+      less: () => this.setState({ vecinos: Math.max(1, s.vecinos - 1) }),
+      more: () => this.setState({ vecinos: Math.min(12, s.vecinos + 1) }),
+      barStyle: 'height: 100%; width: 100%; border-radius: 999px; background: #19D3C5; transform: scaleX(' + (pct / 20) + ');',
+      descText: pct > 0 ? pct + ' % de descuento' : 'Sin descuento aún',
+      descMsg: pct >= 20 ? '¡Llegaron al descuento máximo!' : (pct > 0 ? 'Suma más vecinos para ahorrar más.' : 'Con 2 vecinos ya empiezan a ahorrar.'),
+
+      faqs: faqs.map((f, i) => ({ ...f, open: s.faq === i, expanded: s.faq === i ? 'true' : 'false', panelId: 'sl-faq-' + i, iconStyle: 'width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: transform 300ms cubic-bezier(0.16,1,0.3,1), background-color 200ms; ' + (s.faq === i ? 'transform: rotate(45deg); background: #2F5BFF; color: #FFFFFF;' : 'background: #FFFFFF; color: #2F5BFF;'), toggle: () => this.setState({ faq: s.faq === i ? -1 : i }) })),
+
+      nombre: s.nombre.trim() || 'vecino',
+      nombreInput: s.nombre,
+      telefono: s.telefono,
+      edificio: s.edificio,
+      setNombre: (e) => this.setState({ nombre: e.target.value }),
+      setTel: (e) => this.setState({ telefono: e.target.value }),
+      setEdif: (e) => this.setState({ edificio: e.target.value }),
+      errNombre: errNombre,
+      errTel: errTel,
+      errEdif: errEdif,
+      showErrNombre: show && !!errNombre,
+      showErrTel: show && !!errTel,
+      showErrEdif: show && !!errEdif,
+      nombreInvalid: show && errNombre ? 'true' : 'false',
+      telInvalid: show && errTel ? 'true' : 'false',
+      edifInvalid: show && errEdif ? 'true' : 'false',
+      nombreStyle: inputStyle(errNombre),
+      telStyle: inputStyle(errTel),
+      edifStyle: inputStyle(errEdif),
+      showSummary: show && errors > 0,
+      errCount: errors === 1 ? '1 dato' : errors + ' datos',
+      send: () => this.setState({ tried: true, sent: errors === 0 }),
+      edit: () => this.setState({ sent: false }),
+      reset: () => this.setState({ sent: false, tried: false, nombre: '', telefono: '', edificio: '' }),
+      sent: s.sent,
+      notSent: !s.sent
+    };
+    for (let i = 0; i < cats.length; i++) {
+      vals['p' + i] = () => this.setState({ cat: i });
+      vals['a' + i] = i === s.cat ? 'true' : 'false';
+      vals['t' + i] = tileBase + (i === s.cat ? tileOn : tileOff);
+    }
+    return vals;
+  }
+}
+</script>
+</body>
+</html>
